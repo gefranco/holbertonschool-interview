@@ -9,11 +9,11 @@ def canUnlockAll(boxes):
             while j < len(boxes[i]):
                 key = boxes[i][j]
                 if key >= len(boxes):
-                    j+=1
+                    j += 1
                     continue
                 if state_boxes[key] == 0 and key < i:
                     state_boxes[key] = 1
-                    i = key - 1 
+                    i = key - 1
                     j = len(boxes[i])
                 else:
                     state_boxes[key] = 1
@@ -29,8 +29,8 @@ def canUnlockAll(boxes):
             #     return False
         j = 0
         i += 1
-        #print(boxes)
-        #print(state_boxes)
+        # print(boxes)
+        # print(state_boxes)
     if state_boxes.count(0) > 0:
         return False
 
