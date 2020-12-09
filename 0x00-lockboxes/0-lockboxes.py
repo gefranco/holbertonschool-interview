@@ -27,8 +27,8 @@ def canUnlockAll(boxes):
             #     return False
         j = 0
         i += 1
-    print(boxes)
-    print(state_boxes)
+    # print(boxes)
+    # print(state_boxes)
     if state_boxes.count(0) > 0:
         return False
 
