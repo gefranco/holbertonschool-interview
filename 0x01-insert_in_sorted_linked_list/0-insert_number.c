@@ -36,7 +36,6 @@ listint_t *insert_node(listint_t **head, int number)
 		}
 		current = current->next;
 	}
-	printf("current:%d \n",current->n);
 	new = malloc(sizeof(listint_t));
 	new->n = number;
 	if(!end)
