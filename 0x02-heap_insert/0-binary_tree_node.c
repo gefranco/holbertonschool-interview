@@ -5,7 +5,7 @@
  * binary_tree_node - Binary tree node
  * @parent: Pointer to the parent node
  * @value: Integer stored in the node
- * Return created node
+ * Return: created node
  */
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 {
