@@ -1,7 +1,8 @@
 #include "binary_trees.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+void insert_left_node(heap_t **node, heap_t **current, int value, int count);
+void insert_right_node(heap_t **node, heap_t **current, int value, int count);
 /**
  * heap_insert - inserts a value into a Max Binary Heap
  * @root: Pointer to the root node
@@ -32,24 +33,138 @@ heap_t *heap_insert(heap_t **root, int value)
 	i = get_current_node(&current, n_path);
 	if (n_path[i] == 0)
 	{
-		node->parent = current;
+		/*node->parent = current;
 		node->n = value;
 		current->left = node;
 		node->left = NULL;
-		node->right = NULL;
+		node->right = NULL;*/
+		if(value > (*root)->n)
+			*root = node;
+		insert_left_node(&node, &current, value, count);
+		
 		return (node);
 
 	}
-	else
+	else if(n_path[i] == 1)
 	{
-		node->parent = current;
+		/*node->parent = current;
 		node->n = value;
 		current->right = node;
 		node->left = NULL;
-		node->right = NULL;
+		node->right = NULL;*/
+		if(value > (*root)->n)
+		{
+			/*heap_t *left;*/
+			
+			/*root = binary_tree_node(NULL, 98);
+        		root->left = binary_tree_node(root, 12);
+        		root->left->left = binary_tree_node(root->left, 6);
+        		root->left->right = binary_tree_node(root->left, 16);
+			*/
+			/*new_node = (*root)->right->left;
+        		new_node = malloc(sizeof(heap_t));
+                        new_node->n = (*root)->right->left->n;
+			new_node->parent = (*root)->right;*/
+			/*left = (*root)->left;*/
+			
+			node->n = value; 
+			node->right = *root;
+			node->parent = NULL;
+			node->left = binary_tree_node(node, (*root)->left->n);
+			node->left->left = binary_tree_node(node->left,(*root)->left->left->n);
+			node->left->right = binary_tree_node(node->right,(*root)->left->right->n);
+			/*(*root)->left = NULL;	*/
+			(*root)->left = binary_tree_node(*root, (*root)->right->left->n);
+			(*root)->right->left = NULL;
+			/*(*root)->parent = node;
+			*root = node;*/
+			*root = node;
+		}
+		else
+			insert_right_node(&node, &current, value, count);
 		return (node);
 	}
 	return (node);
+}
+/*
+heap_t *change(heap_t **root, heap_t mayor, heap_t menor)
+{
+	
+}
+*/
+void insert_left_node(heap_t **node, heap_t **current, int value, int count)
+{
+	heap_t *tmp;
+	tmp = *current;
+	if (value > (*current)->n)
+	{
+		(*node)->n = value;
+		(*node)->left = *current;
+		(*node)->right = (*current)->right;
+		(*node)->parent = (*current)->parent;
+		if((*current)->parent && (count/2) % 2 > 0)/*fix*/
+			(*current)->parent->right = *node;
+		else if ((*current)->parent)
+			(*current)->parent->left = *node;		
+		(*current)->parent = *node;
+		/*(*current)->left = NULL;*/
+		*current = tmp;
+		(*current)->left = NULL;
+                (*current)->right = NULL;
+	}
+	else
+	{
+		(*node)->parent = *current;
+		(*node)->n = value;
+		(*current)->left = *node;
+		(*node)->left = NULL;
+		(*node)->right = NULL;
+	}
+	/*if(value > current->n)
+                {
+                        node->left = current;
+                        current->parent = node;
+                        node->parent = NULL;
+                        current->left = NULL;
+                        current = node;
+                }
+                else
+                {
+                        (*root)->left = node;
+                        node->parent = *root;
+                }
+	*/
+}
+void insert_right_node(heap_t **node, heap_t **current, int value, int count)
+{
+	heap_t *new_node;
+        new_node = malloc(sizeof(heap_t));
+	new_node->n = (*current)->n;
+        if (value > (*current)->n)
+        {
+                (*node)->n = value;
+                (*node)->right = new_node;
+                (*node)->left = (*current)->left;
+                (*node)->parent = (*current)->parent;
+                if((*current)->parent && (count/2) % 2 == 0)/*fix*/
+                        (*current)->parent->left = *node;
+                else if ((*current)->parent)
+                        (*current)->parent->right = *node;
+                /*(*current)->left = NULL;*/
+               /* *current = tmp;*/
+               	
+                new_node->parent = *node;
+		new_node->left = NULL;
+                new_node->right = NULL;
+        }
+	else
+	{
+		(*node)->parent = *current;
+		(*node)->n = value;
+		(*current)->right = *node;
+		(*node)->left = NULL;
+		(*node)->right = NULL;
+	}
 }
 /**
  * get_current_node - traverse the path to the node to insert a newone
