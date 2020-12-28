@@ -12,7 +12,7 @@
 heap_t *heap_insert(heap_t **root, int value)
 {
 	static int count;
-	heap_t *node, *current;
+	heap_t *node, *current, *left, *right;
 	int *n_path;
 	int i;
 
@@ -24,6 +24,7 @@ heap_t *heap_insert(heap_t **root, int value)
 		(*root)->n = value;
 		(*root)->left = NULL;
 		(*root)->right = NULL;
+		(*root)->parent = NULL;
 		return (*root);
 	}
 	n_path = path(count);
@@ -38,6 +39,59 @@ heap_t *heap_insert(heap_t **root, int value)
 		current->left = node;
 		node->left = NULL;
 		node->right = NULL;
+		while( node->n > node->parent->n && node->parent->parent != NULL)
+		{
+			node->left = node->parent;
+			
+			node->parent->left = NULL;
+			
+			node->right = node->parent->right;
+			node->parent->right = NULL;
+			if(node->parent->parent != NULL)/*no es root*/
+			{
+				if(count/2 % 2 == 0)
+					node->parent->parent->left = node;
+				else
+					node->parent->parent->right = node;			
+				node->parent = node->parent->parent;
+		
+				node->left->parent = node;
+			}
+			else/*root*/
+			{
+				node->parent->parent = node;
+				node->parent = NULL;
+				*root = node;
+				break;
+			}
+			
+		}
+		if(node->parent->parent == NULL && node->parent->n < node->n)
+                {
+			if(node->parent->right != NULL)
+			{
+				right = node->parent->right;
+				
+                        	right->parent = node;
+				
+                        }
+			node->parent->parent = node;
+                        node->parent->left = node->left;
+                        if(node->left)
+				node->left->parent = node->parent;
+                        node->left = node->parent;
+			
+			 node->parent->right = node->right;
+                        if(node->right)                 
+                                node->right->parent = node->parent;
+                        if(right != NULL)
+                       		node->right = right;
+			node->parent = NULL;
+                        *root = node;
+
+
+                }
+
 		return (node);
 
 	}
@@ -48,6 +102,53 @@ heap_t *heap_insert(heap_t **root, int value)
 		current->right = node;
 		node->left = NULL;
 		node->right = NULL;
+
+		while( node->n > node->parent->n && node->parent->parent != NULL)
+		{
+			node->right = node->parent;
+			
+			node->parent->right = NULL;
+			
+			node->left = node->parent->left;
+			node->parent->left->parent = node;
+			node->parent->left = NULL;
+			if(node->parent->parent != NULL)/*no es root*/
+			{
+				if(count/2 % 2 == 0)
+					node->parent->parent->left = node;
+				else
+					node->parent->parent->right = node;			
+				node->parent = node->parent->parent;
+		
+				node->right->parent = node;
+			}
+			else/*root*/
+			{
+				node->parent->parent = node;
+				node->left = node->parent->left;
+				node->parent = NULL;
+				
+				*root = node;
+				break;
+			}
+			
+		}
+		if(node->parent->parent == NULL && node->parent->n < node->n)
+                {	
+			left = node->parent->left;
+                        node->parent->parent = node;
+			node->parent->right = node->right;
+			node->right->parent = node->parent;
+			node->right = node->parent;
+                        node->parent->left = node->left;
+			node->left->parent = node->parent;
+			node->left = left;
+			left->parent = node;
+			node->parent = NULL;
+                        *root = node;
+
+                }
+
 		return (node);
 	}
 	return (node);
