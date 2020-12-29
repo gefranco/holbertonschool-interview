@@ -40,7 +40,7 @@ heap_t *heap_insert(heap_t **root, int value)
 		current->left = node;
 		node->left = NULL;
 		node->right = NULL;
-		while( node->n > node->parent->n && node->parent->parent != NULL)
+		if( node->n > node->parent->n && node->parent->parent != NULL)
 		{
 			printf("%d   changinnnnnnnng   --- %d\n", node->n, countrv);
 			if(countrv%2 == 0)
@@ -111,7 +111,7 @@ heap_t *heap_insert(heap_t **root, int value)
 		node->left = NULL;
 		node->right = NULL;
 
-		while( node->n > node->parent->n && node->parent->parent != NULL)
+		if( node->n > node->parent->n && node->parent->parent != NULL)
 		{
 			/*chngndr(node, countrv);*/
 			if(countrv%2 == 0)
