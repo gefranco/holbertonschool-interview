@@ -21,4 +21,6 @@ void binary_tree_print(const binary_tree_t *);
 heap_t *heap_insert(heap_t **root, int value);
 int *path(int count);
 int get_current_node(heap_t **current, int *n_path);
+void chngndr(heap_t *node, int countrv);
+void chngndl(heap_t *node, int countrv);
 #endif

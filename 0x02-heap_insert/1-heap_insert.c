@@ -14,7 +14,7 @@ heap_t *heap_insert(heap_t **root, int value)
 	static int count;
 	heap_t *node, *current, *left, *right;
 	int *n_path;
-	int i;
+	int i, countrv;
 
 	count++;
 	node = malloc(sizeof(heap_t));
@@ -30,10 +30,11 @@ heap_t *heap_insert(heap_t **root, int value)
 	n_path = path(count);
 	i = 0;
 	current = *root;
-
+	countrv = count;
 	i = get_current_node(&current, n_path);
 	if (n_path[i] == 0)
-	{
+	{printf("LEFT\n");
+		
 		node->parent = current;
 		node->n = value;
 		current->left = node;
@@ -41,15 +42,22 @@ heap_t *heap_insert(heap_t **root, int value)
 		node->right = NULL;
 		while( node->n > node->parent->n && node->parent->parent != NULL)
 		{
-			node->left = node->parent;
+			printf("%d   changinnnnnnnng   --- %d\n", node->n, countrv);
+			if(countrv%2 == 0)
+				chngndl(node, countrv);
+			else
+				chngndr(node, countrv);
+			/*node->left = node->parent;
 			
 			node->parent->left = NULL;
 			
 			node->right = node->parent->right;
 			node->parent->right = NULL;
-			if(node->parent->parent != NULL)/*no es root*/
+
+			if(node->parent->parent != NULL)*no es root*
 			{
-				if(count/2 % 2 == 0)
+				md = countrv % 2;
+				if(md > 1 || (countrv/2)%2 == 0)*left*
 					node->parent->parent->left = node;
 				else
 					node->parent->parent->right = node;			
@@ -57,17 +65,17 @@ heap_t *heap_insert(heap_t **root, int value)
 		
 				node->left->parent = node;
 			}
-			else/*root*/
+			*else*root
 			{
 				node->parent->parent = node;
 				node->parent = NULL;
 				*root = node;
 				break;
-			}
-			
+			}*/
+			countrv--;
 		}
 		if(node->parent->parent == NULL && node->parent->n < node->n)
-                {
+                {printf("changing root!!!!\n");
 			if(node->parent->right != NULL)
 			{
 				right = node->parent->right;
@@ -96,7 +104,7 @@ heap_t *heap_insert(heap_t **root, int value)
 
 	}
 	else
-	{
+	{printf("RIGHT\n");
 		node->parent = current;
 		node->n = value;
 		current->right = node;
@@ -105,24 +113,39 @@ heap_t *heap_insert(heap_t **root, int value)
 
 		while( node->n > node->parent->n && node->parent->parent != NULL)
 		{
-			node->right = node->parent;
+			/*chngndr(node, countrv);*/
+			if(countrv%2 == 0)
+                                chngndl(node, countrv);
+                        else
+                                chngndr(node, countrv);
+	
+			/*node->right = node->parent;
 			
 			node->parent->right = NULL;
 			
 			node->left = node->parent->left;
 			node->parent->left->parent = node;
 			node->parent->left = NULL;
-			if(node->parent->parent != NULL)/*no es root*/
-			{
-				if(count/2 % 2 == 0)
-					node->parent->parent->left = node;
+			printf("countrvmod2 %d\n", countrv%2);
+			if(node->parent->parent != NULL)*no es root*
+			{printf("enter****\n");
+			md = countrv % 2;
+				if(md > 0 && (countrv/2)%2 == 0)
+				{
+					
+					node->parent->parent->left = node;			
+					printf("changing node\n");
+				
+				}
 				else
-					node->parent->parent->right = node;			
+				{printf("?????\n");
+					node->parent->parent->right = node;
+				}
 				node->parent = node->parent->parent;
 		
 				node->right->parent = node;
-			}
-			else/*root*/
+			}*/
+			/*else*root*
 			{
 				node->parent->parent = node;
 				node->left = node->parent->left;
@@ -130,11 +153,12 @@ heap_t *heap_insert(heap_t **root, int value)
 				
 				*root = node;
 				break;
-			}
-			
+			}*/
+			countrv--;
 		}
 		if(node->parent->parent == NULL && node->parent->n < node->n)
                 {	
+			printf("changing root %d", node->parent->left->n);
 			left = node->parent->left;
                         node->parent->parent = node;
 			node->parent->right = node->right;
@@ -153,6 +177,61 @@ heap_t *heap_insert(heap_t **root, int value)
 	}
 	return (node);
 }
+void chngndr(heap_t *node, int countrv)
+{
+	int md;
+			node->right = node->parent;
+			
+			node->parent->right = NULL;
+			
+			node->left = node->parent->left;
+			node->parent->left->parent = node;
+			node->parent->left = NULL;
+			printf("countrvmod2 %d\n", countrv%2);
+			if(node->parent->parent != NULL)/*no es root*/
+			{printf("enter****\n");
+			md = countrv % 2;
+				if(md > 0 && (countrv/2)%2 == 0)
+				{
+					
+					node->parent->parent->left = node;			
+					printf("changing node\n");
+				
+				}
+				else
+				{printf("?????\n");
+					node->parent->parent->right = node;
+				}
+				node->parent = node->parent->parent;
+		
+				node->right->parent = node;
+			}
+}
+void chngndl(heap_t *node, int countrv)
+{
+	int md;
+	printf("changing node left: %d\n", node->n);
+			node->left = node->parent;
+			
+			node->parent->left = NULL;
+			
+			node->right = node->parent->right;
+			node->parent->right = NULL;
+
+			if(node->parent->parent != NULL)/*no es root*/
+			{
+				md = countrv % 2;
+				if(md > 1 || (countrv/2)%2 == 0)/*left*/
+					node->parent->parent->left = node;
+				else
+					node->parent->parent->right = node;			
+				node->parent = node->parent->parent;
+		
+				node->left->parent = node;
+			}
+	
+}
+
 /**
  * get_current_node - traverse the path to the node to insert a newone
  * @current: Pointer to the root node
@@ -220,3 +299,8 @@ int *path(int count)
 	}
 	return (path);
 }
+/*
+int isleft(int count)
+{
+	
+}*/
