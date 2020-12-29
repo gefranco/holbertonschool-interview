@@ -33,7 +33,7 @@ heap_t *heap_insert(heap_t **root, int value)
 	countrv = count;
 	i = get_current_node(&current, n_path);
 	if (n_path[i] == 0)
-	{printf("LEFT\n");
+	{
 		
 		node->parent = current;
 		node->n = value;
@@ -42,7 +42,6 @@ heap_t *heap_insert(heap_t **root, int value)
 		node->right = NULL;
 		if( node->n > node->parent->n && node->parent->parent != NULL)
 		{
-			printf("%d   changinnnnnnnng   --- %d\n", node->n, countrv);
 			if(countrv%2 == 0)
 				chngndl(node, countrv);
 			else
@@ -75,7 +74,7 @@ heap_t *heap_insert(heap_t **root, int value)
 			countrv--;
 		}
 		if(node->parent->parent == NULL && node->parent->n < node->n)
-                {printf("changing root!!!!\n");
+                {	
 			if(node->parent->right != NULL)
 			{
 				right = node->parent->right;
@@ -104,7 +103,7 @@ heap_t *heap_insert(heap_t **root, int value)
 
 	}
 	else
-	{printf("RIGHT\n");
+	{
 		node->parent = current;
 		node->n = value;
 		current->right = node;
@@ -158,7 +157,6 @@ heap_t *heap_insert(heap_t **root, int value)
 		}
 		if(node->parent->parent == NULL && node->parent->n < node->n)
                 {	
-			printf("changing root %d", node->parent->left->n);
 			left = node->parent->left;
                         node->parent->parent = node;
 			node->parent->right = node->right;
@@ -187,19 +185,17 @@ void chngndr(heap_t *node, int countrv)
 			node->left = node->parent->left;
 			node->parent->left->parent = node;
 			node->parent->left = NULL;
-			printf("countrvmod2 %d\n", countrv%2);
 			if(node->parent->parent != NULL)/*no es root*/
-			{printf("enter****\n");
+			{
 			md = countrv % 2;
 				if(md > 0 && (countrv/2)%2 == 0)
 				{
 					
 					node->parent->parent->left = node;			
-					printf("changing node\n");
 				
 				}
 				else
-				{printf("?????\n");
+				{
 					node->parent->parent->right = node;
 				}
 				node->parent = node->parent->parent;
@@ -210,7 +206,6 @@ void chngndr(heap_t *node, int countrv)
 void chngndl(heap_t *node, int countrv)
 {
 	int md;
-	printf("changing node left: %d\n", node->n);
 			node->left = node->parent;
 			
 			node->parent->left = NULL;
