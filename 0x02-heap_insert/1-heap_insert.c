@@ -40,40 +40,10 @@ heap_t *heap_insert(heap_t **root, int value)
 		current->left = node;
 		node->left = NULL;
 		node->right = NULL;
-		if( node->n > node->parent->n && node->parent->parent != NULL)
-		{
-			if(countrv%2 == 0)
-				chngndl(node, countrv);
-			else
-				chngndr(node, countrv);
-			/*node->left = node->parent;
-			
-			node->parent->left = NULL;
-			
-			node->right = node->parent->right;
-			node->parent->right = NULL;
-
-			if(node->parent->parent != NULL)*no es root*
-			{
-				md = countrv % 2;
-				if(md > 1 || (countrv/2)%2 == 0)*left*
-					node->parent->parent->left = node;
-				else
-					node->parent->parent->right = node;			
-				node->parent = node->parent->parent;
 		
-				node->left->parent = node;
-			}
-			*else*root
-			{
-				node->parent->parent = node;
-				node->parent = NULL;
-				*root = node;
-				break;
-			}*/
-			countrv--;
-		}
-		if(node->parent->parent == NULL && node->parent->n < node->n)
+
+
+/*if(node->parent->parent == NULL && node->parent->n < node->n)
                 {	
 			if(node->parent->right != NULL)
 			{
@@ -97,9 +67,9 @@ heap_t *heap_insert(heap_t **root, int value)
                         *root = node;
 
 
-                }
+                }*/
 
-		return (node);
+		/*return (node);*/
 
 	}
 	else
@@ -110,52 +80,9 @@ heap_t *heap_insert(heap_t **root, int value)
 		node->left = NULL;
 		node->right = NULL;
 
-		if( node->n > node->parent->n && node->parent->parent != NULL)
-		{
-			/*chngndr(node, countrv);*/
-			if(countrv%2 == 0)
-                                chngndl(node, countrv);
-                        else
-                                chngndr(node, countrv);
-	
-			/*node->right = node->parent;
-			
-			node->parent->right = NULL;
-			
-			node->left = node->parent->left;
-			node->parent->left->parent = node;
-			node->parent->left = NULL;
-			printf("countrvmod2 %d\n", countrv%2);
-			if(node->parent->parent != NULL)*no es root*
-			{printf("enter****\n");
-			md = countrv % 2;
-				if(md > 0 && (countrv/2)%2 == 0)
-				{
-					
-					node->parent->parent->left = node;			
-					printf("changing node\n");
-				
-				}
-				else
-				{printf("?????\n");
-					node->parent->parent->right = node;
-				}
-				node->parent = node->parent->parent;
-		
-				node->right->parent = node;
-			}*/
-			/*else*root*
-			{
-				node->parent->parent = node;
-				node->left = node->parent->left;
-				node->parent = NULL;
-				
-				*root = node;
-				break;
-			}*/
-			countrv--;
-		}
-		if(node->parent->parent == NULL && node->parent->n < node->n)
+		/*while( node->n > node->parent->n && node->parent->parent != NULL)
+		}*/
+		/*if(node->parent->parent == NULL && node->parent->n < node->n)
                 {	
 			left = node->parent->left;
                         node->parent->parent = node;
@@ -169,26 +96,109 @@ heap_t *heap_insert(heap_t **root, int value)
 			node->parent = NULL;
                         *root = node;
 
-                }
+                }*/
 
-		return (node);
+		/*return (node);*/
+	}
+	                while( node->n > node->parent->n && node->parent->parent != NULL)
+                {
+                        /*chngndr(node, countrv);*/
+                        if(node == node->parent->left)
+                                chngndl(node, countrv, count);
+                        else
+                                chngndr(node, countrv, count);
+
+
+                        countrv--;
+                }
+		
+	if(node->parent->parent == NULL && node->parent->n < node->n && node == node->parent->right )
+                {       
+                        left = node->parent->left;
+                        node->parent->parent = node;
+                        node->parent->right = node->right;
+                        node->right->parent = node->parent;
+                        node->right = node->parent;
+                        node->parent->left = node->left;
+                        node->left->parent = node->parent;
+                        node->left = left;
+                        left->parent = node;
+                        node->parent = NULL;
+                        *root = node;
+
+                }
+	else if(node->parent->parent == NULL && node->parent->n < node->n)
+	{
+                        if(node->parent->right != NULL)
+                        {
+                                right = node->parent->right;
+                                
+                                right->parent = node;
+                                
+                        }
+                        node->parent->parent = node;
+                        node->parent->left = node->left;
+                        if(node->left)
+                                node->left->parent = node->parent;
+                        node->left = node->parent;
+                        
+                         node->parent->right = node->right;
+                        if(node->right)                 
+                                node->right->parent = node->parent;
+                        if(right != NULL)
+                                node->right = right;
+                        node->parent = NULL;
+                        *root = node;
+
+
+                
 	}
 	return (node);
 }
-void chngndr(heap_t *node, int countrv)
+void chngndr(heap_t *node, int countrv, int count)
 {
-	int md;
+	
+	/*int md;*/
+	heap_t *tmp = NULL;
+	heap_t *rtmp = NULL;
+	
+	
+	rtmp = node->right;
 			node->right = node->parent;
 			
-			node->parent->right = NULL;
+	if(count > countrv)
+	{
+		
+		node->parent->right = rtmp;
+		if(rtmp != NULL)
+			rtmp->parent = node->parent;
+		
+		node->left->parent = node->parent;
+		tmp = node->left;
+		tmp->parent =  node->parent;
+		/*node->parent->left->parent = node;*/
+	}
+
+
+         else
+                        {
+                                node->parent->right = NULL;
+                        }
+
+
+
+
+
+			/*node->parent->right = NULL;*/
 			
 			node->left = node->parent->left;
 			node->parent->left->parent = node;
-			node->parent->left = NULL;
+			node->parent->left = tmp;
 			if(node->parent->parent != NULL)/*no es root*/
 			{
-			md = countrv % 2;
-				if(md > 0 && (countrv/2)%2 == 0)
+			/*md = countrv % 2;*/
+				/*if(md > 0 && (countrv/2)%2 == 0)*/
+				if(node->parent == node->parent->parent->left)
 				{
 					
 					node->parent->parent->left = node;			
@@ -203,20 +213,49 @@ void chngndr(heap_t *node, int countrv)
 				node->right->parent = node;
 			}
 }
-void chngndl(heap_t *node, int countrv)
+void chngndl(heap_t *node, int countrv, int count)
 {
-	int md;
-			node->left = node->parent;
+	/*int md;*/
+	heap_t *tmp = NULL;	
+	heap_t *ltmp = NULL;	
+			ltmp = node->left;
+			/*if(node == node->parent->right)
+			{
+				node->right = node->parent;
+				printf("sisisi");
+			}
+			else*/
+				node->left = node->parent;
 			
-			node->parent->left = NULL;
+			if(count > countrv)
+			{
+				/*node->parent->left = node->left;*/
+				node->parent->left = ltmp;
+				ltmp->parent = node->parent;
+				if(node->right != NULL)
+					node->right->parent = node->parent;
+				
+				tmp = node->right;
+				if(tmp != NULL)
+					tmp->parent = node->parent;
+				
+				node->parent->right->parent = node;
+			}
+			else
+			{
+				node->parent->left = NULL;
+			}
+			/*node->parent->left = NULL;*/
 			
 			node->right = node->parent->right;
-			node->parent->right = NULL;
+			
+			node->parent->right = tmp;
 
 			if(node->parent->parent != NULL)/*no es root*/
 			{
-				md = countrv % 2;
-				if(md > 1 || (countrv/2)%2 == 0)/*left*/
+				/*md = countrv % 2;*/
+				/*if(md > 1 || (countrv/2)%2 == 0)left*/
+				if(node->parent == node->parent->parent->left)	
 					node->parent->parent->left = node;
 				else
 					node->parent->parent->right = node;			
