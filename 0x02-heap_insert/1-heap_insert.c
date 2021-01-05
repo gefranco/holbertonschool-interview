@@ -179,6 +179,7 @@ heap_t *heap_insert(heap_t **root, int value)
 
                 
 	}
+	free(n_path);
 	return (node);
 }
 void chngndr(heap_t *node, int countrv, int count)
