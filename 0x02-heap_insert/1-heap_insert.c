@@ -125,7 +125,7 @@ heap_t *heap_insert(heap_t **root, int value)
 	
                 while(node->n > node->parent->n && node->parent->parent != NULL)
                 {
-                        /*chngndr(node, countrv);*/
+			 /*chngndr(node, countrv);*/
                         if(node == node->parent->left)
                                 chngndl(node, countrv, count);
                         else
@@ -136,7 +136,6 @@ heap_t *heap_insert(heap_t **root, int value)
                 }
 	if(node->parent->parent == NULL && node->parent->n < node->n &&  node == node->parent->right) 
                 {       
-                       
 			 left = node->parent->left;
                         node->parent->parent = node;
                         node->parent->right = node->right;
@@ -154,14 +153,17 @@ heap_t *heap_insert(heap_t **root, int value)
                 }
 	else if(node->parent->parent == NULL && node->parent->n < node->n)
 	{
-                        if(node->parent->right != NULL)
+                       right = NULL;
+			 if(node->parent->right)
                         {
                                 right = node->parent->right;
                                 
                                 right->parent = node;
                                 
                         }
-                        node->parent->parent = node;
+	
+			node->parent->parent = node;
+			
                         node->parent->left = node->left;
                         if(node->left)
                                 node->left->parent = node->parent;
@@ -172,9 +174,8 @@ heap_t *heap_insert(heap_t **root, int value)
                                 node->right->parent = node->parent;
                         if(right != NULL)
                                 node->right = right;
-                        node->parent = NULL;
+			node->parent = NULL;
                         *root = node;
-
 
                 
 	}
