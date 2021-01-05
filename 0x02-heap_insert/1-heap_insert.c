@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 /**
  * heap_insert - inserts a value into a Max Binary Heap
  * @root: Pointer to the root node
@@ -11,37 +10,56 @@
  */
 heap_t *heap_insert(heap_t **root, int value)
 {
-	static int count;
 	heap_t *node, *current, *left, *right;
 	int *n_path;
 	int i, countrv;
 
+	static int count;
 	count++;
-	node = malloc(sizeof(heap_t));
 	if (count == 1)
 	{
-		*root = node;
-		(*root)->n = value;
+		/*(*root)->n = value;
 		(*root)->left = NULL;
 		(*root)->right = NULL;
 		(*root)->parent = NULL;
+		return (*root);*/
+		
+		/*node->n = value;
+		node->left = NULL;
+		node->right = NULL;
+		node->parent = NULL;
+		
+		*root = node;*/
+		*root = binary_tree_node(NULL, value);
+		/**root = node;*/
 		return (*root);
 	}
+	
+	/*node = malloc(sizeof(heap_t));*/
 	n_path = path(count);
 	i = 0;
 	current = *root;
 	countrv = count;
-	i = get_current_node(&current, n_path);
+	
+	i = get_current_index(&current, n_path);
+	/*current = *root;
+	current = get_current_node(&current, n_path);
+*/
+	/*current = *root;*/
 	if (n_path[i] == 0)
 	{
-		
-		node->parent = current;
+		current->left = binary_tree_node(current, value);
+		node = current->left;		
+		/*node->parent = current;
+		printf("parent %d\n", current->n);
 		node->n = value;
+		printf("left %d\n", node->n);
 		current->left = node;
 		node->left = NULL;
 		node->right = NULL;
-		
-
+		*/
+		/*printf("parent*** %d\n", node->parent->n);
+*/
 
 /*if(node->parent->parent == NULL && node->parent->n < node->n)
                 {	
@@ -74,12 +92,16 @@ heap_t *heap_insert(heap_t **root, int value)
 	}
 	else
 	{
+		current->right = binary_tree_node(current, value);
+		node = current->right;
+		/*printf("????node current%d\n", current->n);
 		node->parent = current;
+		printf("????node parent%d\n", node->parent->n);
 		node->n = value;
 		current->right = node;
 		node->left = NULL;
 		node->right = NULL;
-
+*/
 		/*while( node->n > node->parent->n && node->parent->parent != NULL)
 		}*/
 		/*if(node->parent->parent == NULL && node->parent->n < node->n)
@@ -98,9 +120,10 @@ heap_t *heap_insert(heap_t **root, int value)
 
                 }*/
 
-		/*return (node);*/
+		/*return (nothing);*/
 	}
-	                while( node->n > node->parent->n && node->parent->parent != NULL)
+	
+                while(node->n > node->parent->n && node->parent->parent != NULL)
                 {
                         /*chngndr(node, countrv);*/
                         if(node == node->parent->left)
@@ -111,16 +134,18 @@ heap_t *heap_insert(heap_t **root, int value)
 
                         countrv--;
                 }
-		
-	if(node->parent->parent == NULL && node->parent->n < node->n && node == node->parent->right )
+	if(node->parent->parent == NULL && node->parent->n < node->n &&  node == node->parent->right) 
                 {       
-                        left = node->parent->left;
+                       
+			 left = node->parent->left;
                         node->parent->parent = node;
                         node->parent->right = node->right;
-                        node->right->parent = node->parent;
+                        if(node->right)
+				node->right->parent = node->parent;
                         node->right = node->parent;
                         node->parent->left = node->left;
-                        node->left->parent = node->parent;
+                       	if(node->left)
+			 	node->left->parent = node->parent;
                         node->left = left;
                         left->parent = node;
                         node->parent = NULL;
@@ -217,7 +242,7 @@ void chngndl(heap_t *node, int countrv, int count)
 {
 	/*int md;*/
 	heap_t *tmp = NULL;	
-	heap_t *ltmp = NULL;	
+	heap_t *ltmp = NULL;
 			ltmp = node->left;
 			/*if(node == node->parent->right)
 			{
@@ -272,10 +297,11 @@ void chngndl(heap_t *node, int countrv, int count)
  * @n_path: path to traverse 0-left 1-right
  * Return: the position of the node
  */
-int get_current_node(heap_t **current, int *n_path)
+int get_current_index(heap_t **current, int *n_path)
 {
 	int i = 0;
-
+	/*heap_t *node;
+	node = *current;	*/
 	while (n_path[i] != -1)
 	{
 		if ((*current)->left == NULL || (*current)->right == NULL)
@@ -289,6 +315,26 @@ int get_current_node(heap_t **current, int *n_path)
 	}
 	return (i);
 }
+
+heap_t *get_current_node(heap_t **node, int *n_path)
+{
+        heap_t *current;
+	int i = 0;
+	current = *node;
+        while (n_path[i] != -1)
+        {
+                if (current->left == NULL || current->right == NULL) 
+			return (current);
+                if (n_path[i] == 0)
+                        current = current->left;
+                else if (n_path[i] == 1)
+                        current = current->right;
+
+                i++;
+        }
+        return current;
+}
+
 /**
  * print_path - helper function
  * @path: --

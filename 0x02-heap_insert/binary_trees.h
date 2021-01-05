@@ -20,7 +20,9 @@ binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 void binary_tree_print(const binary_tree_t *);
 heap_t *heap_insert(heap_t **root, int value);
 int *path(int count);
-int get_current_node(heap_t **current, int *n_path);
 void chngndr(heap_t *node, int countrv, int count);
+int get_current_index(heap_t **current, int *n_path);
+heap_t *get_current_node(heap_t **current, int *n_path);
 void chngndl(heap_t *node, int countrv, int);
+void print_path(int *path);
 #endif
