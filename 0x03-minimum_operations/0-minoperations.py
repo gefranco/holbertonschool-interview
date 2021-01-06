@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def minOperations(n):
 	numbers = []
 	#numbers.append(n)
