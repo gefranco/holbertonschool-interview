@@ -1,7 +1,10 @@
 #include <stdio.h>
 void toppling(int grid[3][3], int positions[3][3]);
 int stable_grid(int grid[3][3]);
-
+/**
+ * print_grid - print a 3x3 array
+ * @grid: the array to print
+ */
 static void print_grid(int grid[3][3])
 {
 	int i, j;
@@ -17,7 +20,11 @@ static void print_grid(int grid[3][3])
 		printf("\n");
 	}
 }
-
+/**
+ * get_positions - search the position in which a toggle need to be made
+ * @grid: array to search in
+ * @positions: array to save the positions
+ */
 void get_positions(int grid[3][3], int positions[3][3])
 {
 	int i, j;
@@ -32,7 +39,11 @@ void get_positions(int grid[3][3], int positions[3][3])
 	}
 
 }
-
+/**
+ * sandpiles_sum - sum two sandpiles
+ * @grid1: sandpile 1
+ * @grid2: sandpile 2
+ */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
 
@@ -65,7 +76,11 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 	}
 }
 
-
+/**
+ * stable_grid - look at array number greater than 3 to find if is not stable
+ * @grid: the array
+ * Return: 1 if stable or 0 if not
+ */
 int stable_grid(int grid[3][3])
 {
 	int i, j;
@@ -81,6 +96,11 @@ int stable_grid(int grid[3][3])
 	return (1);
 }
 
+/**
+ * toppling - 'topple' each of the position given in positions
+ * @grid: the array to do the 'toppling'
+ * @positions: the arry with the positions
+ */
 void toppling(int grid[3][3], int positions[3][3])
 {
 	int i, j;
