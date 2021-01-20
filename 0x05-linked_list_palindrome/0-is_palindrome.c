@@ -16,7 +16,6 @@ int is_palindrome(listint_t **head)
 	}
 	if ((*head)->n != c->n)
 	{
-		free(c);
 		return (0);
 	}
 	else
@@ -25,7 +24,6 @@ int is_palindrome(listint_t **head)
 		*head = (*head)->next;
 		temp->next = NULL;
 		free(thead);
-		free(c);
 		return (is_palindrome(head));
 
 	}
