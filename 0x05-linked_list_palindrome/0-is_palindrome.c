@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdlib.h>
 #include "lists.h"
 
 int is_palindrome(listint_t **head)
@@ -23,7 +23,7 @@ int is_palindrome(listint_t **head)
 	{
 		*head = (*head)->next;
 
-		temp->next = NULL;
+		free(temp->next);
 		return (is_palindrome(head));
 
 	}
