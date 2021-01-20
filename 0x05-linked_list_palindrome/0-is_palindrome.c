@@ -22,8 +22,8 @@ int is_palindrome(listint_t **head)
 	else
 	{
 		*head = (*head)->next;
-
-		free(temp->next);
+		free(c);
+		temp->next = NULL;
 		return (is_palindrome(head));
 
 	}
