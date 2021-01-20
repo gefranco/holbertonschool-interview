@@ -1,7 +1,11 @@
 #include <stdlib.h>
 #include "lists.h"
 
-#include <stdio.h>
+/**
+ * is_palindrome - hecks if a singly linked list is a palindrome
+ * @head: pointer to list to check
+ * Return: 1 if is palindrome 0 if not
+ */
 int is_palindrome(listint_t **head)
 {
 	listint_t *c, *temp, *thead = NULL;
