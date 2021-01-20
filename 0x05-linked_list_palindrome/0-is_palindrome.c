@@ -8,7 +8,7 @@
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *c, *temp/*, *thead*/;
+	listint_t *c, *temp, *thead;
 
 	if (!*head || (*head)->next == NULL)
 		return (1);
@@ -27,12 +27,15 @@ int is_palindrome(listint_t **head)
 	}
 	else
 	{
-		/*thead = *head;*/
+		thead = *head;
+
 		*head = (*head)->next;
-		/*free(thead);*/
+		thead->next = NULL;
+		free_listint(thead);
+		/**thead = '\0';*/
 		temp->next = NULL;
+		free_listint(c);
 		/*free(c);*/
-		c = NULL;
 		return (is_palindrome(head));
 
 	}
