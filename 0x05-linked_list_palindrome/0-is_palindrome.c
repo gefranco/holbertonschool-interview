@@ -3,11 +3,10 @@
 
 int is_palindrome(listint_t **head)
 {
-	listint_t **n, *c, *temp;
+	listint_t *c, *temp;
 
 	if (!*head || (*head)->next == NULL)
 		return (1);
-	n = head;
 	c = *head;
 
 	while (c->next)
@@ -16,9 +15,8 @@ int is_palindrome(listint_t **head)
 		c = c->next;
 	}
 
-	if ((*n)->n != c->n)
+	if ((*head)->n != c->n)
 	{
-		printf("not");
 		return (0);
 	}
 	else
