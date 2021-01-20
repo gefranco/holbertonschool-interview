@@ -15,7 +15,7 @@ int is_palindrome(listint_t **head)
 		temp = c;
 		c = c->next;
 	}
-
+	/*printf("[%d, %d]\n", (*head)->n, c->n);*/
 	if ((*head)->n != c->n)
 	{
 
