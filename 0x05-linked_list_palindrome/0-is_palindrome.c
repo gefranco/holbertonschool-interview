@@ -1,5 +1,7 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "lists.h"
+int compare(listint_t *current, listint_t **head);
 /**
  * is_palindrome - hecks if a singly linked list is a palindrome
  * @head: pointer to list to check
@@ -7,32 +9,21 @@
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *c, *temp;
+	return (compare(*head, head));
+}
 
-	if (!*head || (*head)->next == NULL)
-		return (1);
-	c = *head;
+int compare(listint_t *current, listint_t **head)
+{
+	if (!(current))
+		return 1;
 
-	while (c->next)
+	if(compare(current->next, head))
 	{
-		temp = c;
-		c = c->next;
+		if (current->n == (*head)->n)
+		{
+			(*head) = (*head)->next;
+			return 1;
+		}
 	}
-	/*printf("[%d, %d]\n", (*head)->n, c->n);*/
-	if ((*head)->n != c->n)
-	{
-
-		return (0);
-	}
-	else
-	{
-
-		*head = (*head)->next;
-		/*free(thead);*/ /*the checker dont allow this free*/
-		temp->next = NULL;
-		/*free(c);*/ /*the checker dont allow this free*/
-		return (is_palindrome(head));
-
-	}
-
+	return 0;
 }
