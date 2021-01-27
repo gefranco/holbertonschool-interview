@@ -28,18 +28,18 @@ if __name__ == "__main__":
     }
 # for line in sys.stdin:
     while True:
-        try:
-            line = input()
-            columns = line.split()
-            code_size = columns[-2:]
-            lines_read += 1
-            total_size = total_size + int(code_size[1])
-            stats[code_size[0]] = stats[code_size[0]] + 1
-            if lines_read == 10:
-                stats_print(stats)
-                lines_read = 0
-        except KeyboardInterrupt:
+#        try:
+        line = input()
+        columns = line.split()
+        code_size = columns[-2:]
+        lines_read += 1
+        total_size = total_size + int(code_size[1])
+        stats[code_size[0]] = stats[code_size[0]] + 1
+        if lines_read == 10:
             stats_print(stats)
-            exit()
-        except EOFError:
-            raise
+            lines_read = 0
+#        except KeyboardInterrupt:
+#            stats_print(stats)
+#            exit()
+#        except EOFError:
+#            raise
