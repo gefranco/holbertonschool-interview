@@ -4,6 +4,14 @@ script that read from standard input and compute metrics
 """
 
 import sys
+
+
+def stats_print(stats):
+    print("File size: {:d}".format(total_size))
+    for k in sorted(stats.keys()):
+        if stats[k] > 0:
+            print("{}: {}".format(k, stats[k]))
+
 if __name__ == "__main__":
     lines_read = 0
     total_size = 0
@@ -27,12 +35,8 @@ if __name__ == "__main__":
             total_size = total_size + int(code_size[1])
             stats[code_size[0]] = stats[code_size[0]] + 1
             if lines_read == 10:
-                print("File size: {:d}".format(total_size))
-                for k, v in sorted(stats.items()):
-                    if v > 0:
-                        print("{}: {}".format(k, v))
+                stats_print(stats)
                 lines_read = 0
         except Exception:
-            print("File size: {:d}".format(total_size))
-            for k, v in stats.items():
-                print(k, v)
+            stats_print(stats)
+            exit()
