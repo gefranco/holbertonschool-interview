@@ -40,6 +40,7 @@ if __name__ == "__main__":
                 lines_read = 0
         except KeyboardInterrupt:
             stats_print(stats)
-            exit()
-        except EOFError:
-            exit()
+            raise
+#            exit()
+#        except EOFError:
+#            exit()
