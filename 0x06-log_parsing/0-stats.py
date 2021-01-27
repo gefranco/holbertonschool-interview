@@ -12,6 +12,7 @@ def stats_print(stats):
         if stats[k] > 0:
             print("{}: {}".format(k, stats[k]))
 
+
 if __name__ == "__main__":
     lines_read = 0
     total_size = 0
@@ -37,6 +38,6 @@ if __name__ == "__main__":
             if lines_read == 10:
                 stats_print(stats)
                 lines_read = 0
-        except Exception:
+        except KeyboardInterrupt:
             stats_print(stats)
             exit()
