@@ -29,7 +29,7 @@ if __name__ == "__main__":
             if lines_read == 10:
                 print("File size: {:d}".format(total_size))
                 for k, v in sorted(stats.items()):
-                    print(k, v)
+                    print("{}: {}".format(k, v))
                 lines_read = 0
         except Exception:
             print("File size: {:d}".format(total_size))
