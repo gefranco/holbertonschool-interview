@@ -38,9 +38,9 @@ if __name__ == "__main__":
             if lines_read == 10:
                 stats_print(stats)
                 lines_read = 0
-        except KeyboardInterrupt:
+        except Exception:
             stats_print(stats)
-            raise
+#            raise
 #            exit()
 #        except EOFError:
 #            exit()
