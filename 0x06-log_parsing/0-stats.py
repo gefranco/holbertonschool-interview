@@ -42,4 +42,4 @@ if __name__ == "__main__":
             stats_print(stats)
             exit()
         except EOFError:
-            pass
+            raise
