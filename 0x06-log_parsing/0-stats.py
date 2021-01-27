@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+script that read from standard input and compute metrics
+"""
+
 import sys
 
 lines_read = 0
