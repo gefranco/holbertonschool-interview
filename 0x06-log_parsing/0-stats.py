@@ -41,5 +41,5 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             stats_print(stats)
             exit()
-#        except EOFError:
-#            pass
+        except EOFError:
+            exit()
