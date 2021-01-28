@@ -41,7 +41,6 @@ if __name__ == "__main__":
 
         except Exception:
             break
-        finally:
             stats_print(stats)
 #            raise
 
