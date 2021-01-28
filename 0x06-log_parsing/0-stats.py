@@ -40,8 +40,8 @@ if __name__ == "__main__":
                 lines_read = 0
 
         except Exception:
-            break
             stats_print(stats)
+            break
 #            raise
 
 #        except Exception:
