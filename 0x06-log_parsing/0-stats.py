@@ -39,8 +39,9 @@ if __name__ == "__main__":
                 stats_print(stats)
                 lines_read = 0
 
-        except (KeyboardInterrupt, Exception):
+        except:
             break
+        finally:
             stats_print(stats)
 #            raise
 
