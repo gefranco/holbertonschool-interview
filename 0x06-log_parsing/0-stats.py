@@ -39,7 +39,7 @@ if __name__ == "__main__":
                 stats_print(stats)
                 lines_read = 0
 
-        except:
+        except Exception:
             break
         finally:
             stats_print(stats)
