@@ -41,6 +41,6 @@ if __name__ == "__main__":
         except Exception:
             stats_print(stats)
 #            raise
-#            exit()
+            break
 #        except EOFError:
 #            exit()
