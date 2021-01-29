@@ -32,6 +32,8 @@ if __name__ == "__main__":
             line = input()
             columns = line.split()
             code_size = columns[-2:]
+            if code_size[0] not in stats.keys():
+                continue
             total_size = total_size + int(code_size[1])
             stats[code_size[0]] = stats[code_size[0]] + 1
             lines_read += 1
@@ -39,11 +41,6 @@ if __name__ == "__main__":
                 stats_print(stats)
                 lines_read = 0
 
-        except KeyboardInterrupt:
+        except Exception:
             stats_print(stats)
             break
-#            raise
-        except EOFError:
-            break
-        except Exception:
-            continue
