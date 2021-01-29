@@ -30,19 +30,17 @@ if __name__ == "__main__":
     while True:
         try:
             line = input()
-            columns = line.split()
             lines_read += 1
-            if len(code_size) < 2:
-                continue
+            columns = line.split()
             code_size = columns[-2:]
-            if code_size[0] not in stats.keys():
-                continue
             total_size = total_size + int(code_size[1])
             stats[code_size[0]] = stats[code_size[0]] + 1
             if lines_read == 10:
                 stats_print(stats)
                 lines_read = 0
 
-        except Exception:
+        except KeyboardInterrupt:
             stats_print(stats)
             break
+        except Exception:
+            continue
