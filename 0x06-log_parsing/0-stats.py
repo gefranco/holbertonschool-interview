@@ -34,6 +34,8 @@ if __name__ == "__main__":
             code_size = columns[-2:]
             if code_size[0] not in stats.keys():
                 continue
+            if len(code_size) < 2:
+                continue
             total_size = total_size + int(code_size[1])
             stats[code_size[0]] = stats[code_size[0]] + 1
             lines_read += 1
