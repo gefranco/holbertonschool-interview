@@ -42,5 +42,6 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             stats_print(stats)
             break
+            raise
         except Exception:
             pass
