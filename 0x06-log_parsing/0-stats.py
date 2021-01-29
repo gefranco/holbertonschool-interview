@@ -41,7 +41,6 @@ if __name__ == "__main__":
 
         except KeyboardInterrupt:
             stats_print(stats)
-            print("Keyboard")
             break
 #            raise
         except EOFError:
