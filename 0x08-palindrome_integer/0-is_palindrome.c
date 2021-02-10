@@ -8,21 +8,24 @@ int is_palindrome(unsigned long n)
 	number = 0;
 	b = 1;
 	n = n / 10;
-	while ((m = n % 10))
+	while (n >= 1 /*&& (m = n % 10)*/)
 	{
+		m = n % 10;
 		n = n / 10;
 		b = b * 10;
 	}
 
 	n = svnumber;
 
-	while ((m = n % 10))
+	while (n >= 1 /*&& (m = n % 10)*/)
 	{
+		m = n % 10;
 		n = n / 10;
 		number = number + (b * m);
 		b = b / 10;
 	}
 	n = svnumber;
+
 	if (n == number)
 		return (1);
 	else
