@@ -24,4 +24,6 @@ def validUTF8(data):
                 next_bytes += 1
             else:
                 break
+        if next_bytes > 4:
+            return False
     return True
