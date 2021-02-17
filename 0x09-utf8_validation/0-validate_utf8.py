@@ -8,7 +8,7 @@ def validUTF8(data):
     """
     Method that validates if a set of data is UTF8 encoding
     """
-    next_bytes = -1
+    next_bytes = 0
     for byte_data in data:
         if bin(byte_data).split('b')[1].zfill(8)[0] is "0":
             continue
