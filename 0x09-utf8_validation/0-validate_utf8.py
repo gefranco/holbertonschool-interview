@@ -12,7 +12,7 @@ def validUTF8(data):
     for byte_data in data:
         # if bin(byte_data).split('b')[1].zfill(8)[0] is "0":
         #    continue
-        if next_bytes > 1:
+        if next_bytes > 0:
             # print("!!")
             if bin(byte_data).split('b')[1].zfill(8)[:2] is not "10":
                 return False
