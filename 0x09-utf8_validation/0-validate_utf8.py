@@ -10,13 +10,10 @@ def validUTF8(data):
     """
     next_bytes = 0
     for byte_data in data:
-        # if bin(byte_data).split('b')[1].zfill(8)[0] is "0":
-        #    continue
         byte = bin(byte_data).split('b')[1].zfill(8)[-8:]
-        # print(byte)
         if next_bytes > 0:
-            # print("!!")
-            if byte[:2] is not "10":
+            bit_2 = byte[:2]
+            if bit_2 != "10":
                 return False
             next_bytes -= 1
             if next_bytes is 1:
