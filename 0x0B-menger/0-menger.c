@@ -1,15 +1,18 @@
 #include <stdio.h>
-#include <math.h>
+
+double _pow(int, int);
 void menger(int level)
 {
 	int i, j;
 	int center[4][2] = {{1, 1}, {3, 6}, {9, 18}, {27, 54}};
 	double cfi_1, cfi_2, cfi_3, cfj_1, cfj_2, cfj_3;
-	double fractions = pow(3, level);/*total fractions of cubes*/
+	double fractions = _pow(3, level);/*total fractions of cubes*/
 
 	cfi_1 = cfi_2 = cfi_3 = cfj_1 = cfj_2 = cfj_3 = 0;
 	i = j = 0;
 
+	if (level < 0)
+		return;
 	for (i = 0; i < fractions; i++)
 	{
 		if (cfi_1 == 3)
@@ -47,3 +50,15 @@ void menger(int level)
 		printf("\n");
 	}
 }
+
+double _pow(int b, int n)
+{
+	int i;
+
+	if (n == 0)
+		return (1);
+	for (i = 1; i < n; i++)
+		b *= 3;
+	return (b);
+}
+
