@@ -1,6 +1,14 @@
 #include <stdio.h>
 
 double _pow(int, int);
+
+/**
+ * menger - Entry point
+ *
+ * @level: level of the menger sponge
+ *
+ * Return: nothing
+ */
 void menger(int level)
 {
 	int i, j;
@@ -50,15 +58,22 @@ void menger(int level)
 		printf("\n");
 	}
 }
-
-double _pow(int b, int n)
+/**
+ * _pow - returns the value of x raised to the power of y.
+ *
+ * @x: number to raise
+ * @y: power
+ *
+ * Return: value of x to the power of y.
+ */
+double _pow(int x, int y)
 {
 	int i;
 
-	if (n == 0)
+	if (y == 0)
 		return (1);
-	for (i = 1; i < n; i++)
-		b *= 3;
-	return (b);
+	for (i = 1; i < y; i++)
+		x *= 3;
+	return (x);
 }
 
