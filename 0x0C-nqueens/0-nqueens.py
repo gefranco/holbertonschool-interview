@@ -3,35 +3,55 @@ import sys
 
 
 def put_queens(n, initial_col):
+
+    #print("****", initial_col)
     i = 0
-    j = 0
+    j = initial_col
     total_columns = 0
     solution = []
     
     while i < n:
         queen_pos = [0,0]
+        if j >= n:
+            i -= 1
+    
+            prev = solution.pop()
+            j = prev[1]
+                #j = prev[1]
+            j += 1
         queen_pos[0] = i;
         # table[i][j] = 1;
         queen_pos[1] = j
         solution.append(queen_pos)
+
+
+
         if not check_queens(solution):
-            solution.pop()
+            
+            #if j >= n - 1 and i >= n - 1:
+            #    return False
+            prev = solution.pop()
+            j = prev[1]
             j += 1
             if j >= n:
-                i = 0
-                solution.clear()
-                j = 1
+                i -= 1
+                prev = solution.pop()
+                j = prev[1]
+                #j = prev[1]
+                j += 1
+                #return False
             # i -= 1 
         else:
             i += 1
-            if j >= n - 1:
-                j = 0
+            j = 0
+        if j > n:
+            return False
     print(solution)
 
 def check_queens(solution):
     if len(solution) == 1:
         return True;
-#    print("solution: ", solution) 
+    #print("solution: ", solution) 
     for i in range(len(solution)):
         for j in range(i + 1, len(solution)):
             if (solution[i][1] == solution[j][1] or 
@@ -71,7 +91,7 @@ if __name__ == "__main__":
 #        for j in range(n):
 #            raw.append(0);
 #        table.append(raw);
-#    for i in range(n):
-    put_queens(n, 0)
+    for i in range(1, n-1):
+        put_queens(n, i)
 
 
