@@ -2,53 +2,22 @@
 import sys
 
 
-def put_queens(n, initial_col):
-
-    #print("****", initial_col)
-    i = 0
-    j = initial_col
-    total_columns = 0
-    solution = []
+def put_queens(n, row, solution):
     
-    while i < n:
-        queen_pos = [0,0]
-        if j >= n:
-            i -= 1
-    
-            prev = solution.pop()
-            j = prev[1]
-                #j = prev[1]
-            j += 1
-        queen_pos[0] = i;
-        # table[i][j] = 1;
-        queen_pos[1] = j
-        solution.append(queen_pos)
+    if(n == row):
+        print(solution)
+    else:
+        for col in range(n):
+            queen = [row, col]
+            solution.append(queen)
+            if not all_queens_save(solution):
+                solution.pop()
+                #print(solution) 
+            else:
+                put_queens(n, row + 1, solution)
+                solution.pop()
 
-
-
-        if not check_queens(solution):
-            
-            #if j >= n - 1 and i >= n - 1:
-            #    return False
-            prev = solution.pop()
-            j = prev[1]
-            j += 1
-            if j >= n:
-                i -= 1
-                prev = solution.pop()
-                j = prev[1]
-                #j = prev[1]
-                j += 1
-                #return False
-            # i -= 1 
-        else:
-            i += 1
-            j = 0
-        if j > n:
-            return False
-    print(solution)
-
-def check_queens(solution):
+def all_queens_save(solution):
     if len(solution) == 1:
         return True;
     #print("solution: ", solution) 
@@ -84,14 +53,7 @@ if __name__ == "__main__":
         exit(1)
 
 
-#    table = [];
-#    solution = [];
-#    for i in range(n):
-#        raw = [];
-#        for j in range(n):
-#            raw.append(0);
-#        table.append(raw);
-    for i in range(1, n-1):
-        put_queens(n, i)
+    solution = [];
+    put_queens(n, 0,solution)
 
 
