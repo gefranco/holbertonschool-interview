@@ -18,23 +18,21 @@ avl_t *array_to_avl(int *array, size_t start, size_t end)
 	node = malloc(sizeof(avl_t));
 	if (node == NULL)
 	{
-		node->parent = NULL;
-		node->n = array[midle];
+		return (NULL);
 	}
-	else if (start >= end)
+	else if (start > end)
 	{
-		node->n = array[midle];
-
-		return (node);
+		return (NULL);
 	}
 	node->n = array[midle];
-	node->left = array_to_avl(array, start, midle - 1);
-	if (node->left != NULL)
+	if (midle != start)
+		node->left = array_to_avl(array, start, midle - 1);
+	if (node->left)
 		node->left->parent = node;
-
-	node->right = array_to_avl(array, midle + 1, end);
-	node->right->parent = node;
-	node->right->parent = node;
+	if (midle != end)
+		node->right = array_to_avl(array, midle + 1, end);
+	if (node->right)
+		node->right->parent = node;
 
 	return (node);
 }
