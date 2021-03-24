@@ -20,7 +20,10 @@ avl_t *array_to_avl(int *array, size_t start, size_t end)
 	{
 		return (NULL);
 	}
-	else if (start > end)
+	node->parent = NULL;
+	node->left = NULL;
+	node->right = NULL;
+	if (start > end)
 	{
 		return (NULL);
 	}
