@@ -2,6 +2,14 @@
 #include "binary_trees.h"
 #include <stdio.h>
 
+/**
+ * array_to_avl - builds an AVL tree from an array recursibly
+ *
+ * @array: The array
+ * @start: The start index of the array
+ * @end: the end index of the array
+ * Return: pointer to the root array
+ */
 avl_t *array_to_avl(int *array, size_t start, size_t end)
 {
 	avl_t *node;
@@ -30,6 +38,14 @@ avl_t *array_to_avl(int *array, size_t start, size_t end)
 
 	return (node);
 }
+
+/**
+ * sorted_array_to_avl - builds an AVL tree from an array
+ *
+ * @array: The array
+ * @size: Size of the array
+ * Return: pointer to the root array
+ */
 avl_t *sorted_array_to_avl(int *array, size_t size)
 {
 	return (array_to_avl(array, 0, size - 1));
