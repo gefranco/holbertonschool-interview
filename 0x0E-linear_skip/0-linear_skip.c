@@ -4,13 +4,8 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
 {
 	skiplist_t *prev;
 	size_t last_index;
-	/*while(list)
-	{
-				
-		printf("%ld\n", list->index);
-		list = list->express;
-	}
-	*/
+	if (!list)
+		return NULL;
 	while (list->express)
 	{
 		prev = list;
