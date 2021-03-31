@@ -38,7 +38,6 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
 		prev = prev->next;
 		last_index++;
 	}
-	prev = NULL;
 	printf("Value found between indexes [%ld] and [%ld]\n",
 		list->index, last_index);
 	while (list)
