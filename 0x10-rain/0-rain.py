@@ -14,6 +14,6 @@ def rain(walls):
 				rain_count = wall_1
 			continue
 		if wall <  wall_1:
-			rain_collected += rain_count
+			rain_collected += rain_count - wall
 			
 	return rain_collected;
