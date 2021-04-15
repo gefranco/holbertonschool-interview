@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def rain(walls):
 	rain = 0
 	wall_1 = 0
