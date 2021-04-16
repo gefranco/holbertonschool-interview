@@ -22,6 +22,9 @@ def rain(walls):
         elif wall > 0 and wall_2 == 0:
             wall_2 = wall
             indice_2 = indice
+            if indice + 1 < len(walls) and walls[indice + 1] > wall_2:
+                wall_2 = walls[indice + 1]
+                indice_2 = indice + 1
         if wall_1 > 0 and wall_2 > 0:
             collect_water += collect(
                     walls[indice_1 + 1:indice_2], wall_1, wall_2)
