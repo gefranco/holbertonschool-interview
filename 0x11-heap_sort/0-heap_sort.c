@@ -14,7 +14,7 @@ void heap_sort(int *array, size_t size)
 	size_t i = (size / 2) - 1;
 	size_t i_1, i_2, size_2;
 
-	size_2 = size - 1;
+	size_2 = size;
 	if (!array)
 		return;
 
@@ -23,6 +23,8 @@ void heap_sort(int *array, size_t size)
 
 	for (; i + 1 > 0 && size_2 > 1; i--, i_1 = (i * 2) + 1, i_2 = i_1 + 1)
 	{
+		if (i_2 == size_2)
+			i_2 = -1;
 		greater = greater_child(array, i_1, i_2);
 		if (array[i] < array[greater])
 		{
@@ -37,7 +39,9 @@ void heap_sort(int *array, size_t size)
 
 		if (i == 0)
 		{
-			swap(array, i, size_2);
+			swap(array, i, size_2 - 1);
+
+
 			print_array(array, size);
 			size_2 -= 1;
 			i = 0 + 1;
