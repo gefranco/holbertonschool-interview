@@ -46,7 +46,7 @@ int binary_search(int *array, int value, int start, int end)
 	/*else if (value == array[middle]) return middle;*/
 	else if (value > array[middle])
 		return (binary_search(array, value, middle + 1, end));
-	else if (value < array[middle + 1])
+	else if (value <= array[middle + 1])
 		return (binary_search(array, value, start, middle));
 	return (-1);
 }
