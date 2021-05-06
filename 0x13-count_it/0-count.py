@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+queries the Reddit API,
+parses the title of all hot articles
+and prints a sorted count of given keywords
+"""
 import requests
 import json
 import re
@@ -6,6 +11,9 @@ import sys
 
 
 def count_words(subreddit, word_list):
+    """
+    request to reddit api
+    """
     req = ""
     if not req:
         req = requests.get(
@@ -21,6 +29,9 @@ def count_words(subreddit, word_list):
 
 
 def count(json, index, word_list, index_words, word_count):
+    """
+    recursivly count the words from a title from a json
+    """
     if index_words >= len(word_list):
         return
     if index >= len(json):
