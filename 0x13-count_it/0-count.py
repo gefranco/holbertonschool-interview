@@ -41,8 +41,8 @@ def count(json, index, word_list, index_words, word_count):
     #        json[index]["data"]["title"], re.IGNORECASE)
         # if word_list[index_words] in json[index]["data"]["title"]:
         # print(word_list[index_words] + " : " + json[index]["data"]["title"])
-    c = [x.lower() for x in json[index]["data"]["title"].split()]
-    .count(word_list[index_words].lower())
+    c = [x.lower() for x in json[index]["data"]["title"].split()].count(
+        word_list[index_words].lower())
     # print([x.lower() for x in json[index]["data"]["title"].split()])
     if c > 0:
         word_count += c
