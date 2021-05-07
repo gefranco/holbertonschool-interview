@@ -4,28 +4,39 @@ queries the Reddit API,
 parses the title of all hot articles
 and prints a sorted count of given keywords
 """
-import requests
 import json
+import operator
 import re
+import requests
 import sys
 
 
-def count_words(subreddit, word_list):
+def count_words(subreddit, word_list, after=None, dic={}):
     """
     request to reddit api
     """
+
+    if not dic:
+        for word in word_list:
+            dic.update({word: 0})
     req = requests.get(
-        "http://www.reddit.com/r/{}/hot.json?count=1000".format(sys.argv[1]),
+        "http://www.reddit.com/r/{}/hot.json?after={}".format(
+            sys.argv[1], after),
         headers={'User-agent': 'hbtn'})
     if req.status_code is not 200:
         return
     json_text = json.loads(req.text)
-    # print(json_text["data"]["children"][0]["data"]["title"])
-    count(json_text["data"]["children"], 0, word_list, 0, 0)
-    return 0
+    if json_text["data"]["after"] is None:
+        sorted_dic = sorted(dic.items(),
+                            key=operator.itemgetter(1), reverse=True)
+        for value in sorted_dic:
+            print(value[0] + ": " + str(value[1]))
+        return
+    count(json_text["data"]["children"], 0, word_list, 0, 0, dic)
+    return count_words(subreddit, word_list, json_text["data"]["after"], dic)
 
 
-def count(json, index, word_list, index_words, word_count):
+def count(json, index, word_list, index_words, word_count, dic):
     """
     recursivly count the words from a title from a json
     """
@@ -33,17 +44,11 @@ def count(json, index, word_list, index_words, word_count):
     if index_words >= len(word_list):
         return
     if index >= len(json):
-        if word_count > 0:
-            print(word_list[index_words] + ": " + str(word_count))
-        return count(json, 0, word_list, index_words + 1, 0)
-    # c = re.search(
-    #        r'\b' + word_list[index_words] + r'\b',
-    #        json[index]["data"]["title"], re.IGNORECASE)
-        # if word_list[index_words] in json[index]["data"]["title"]:
-        # print(word_list[index_words] + " : " + json[index]["data"]["title"])
-    c = [x.lower() for x in json[index]["data"]["title"].split()].count(
+        return count(json, 0, word_list, index_words + 1, 0, dic)
+    c = [x for x in json[index]["data"]["title"].lower().split()].count(
         word_list[index_words].lower())
-    # print([x.lower() for x in json[index]["data"]["title"].split()])
+    # print([x for x in json[index]["data"]["title"].lower().split()])
     if c > 0:
         word_count += c
-    return count(json, index + 1, word_list, index_words, word_count)
+        dic.update({word_list[index_words]: dic[word_list[index_words]] + c})
+    return count(json, index + 1, word_list, index_words, word_count, dic)
