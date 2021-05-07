@@ -53,4 +53,5 @@ def count(json, index, word_list, index_words, word_count, dic):
         dic.update(
             {word_list[index_words].lower():
                 dic[word_list[index_words].lower()] + c})
-    return count(json, index + 1, word_list, index_words, word_count, dic)
+    return 
+# count(json, index + 1, word_list, index_words, word_count, dic)
