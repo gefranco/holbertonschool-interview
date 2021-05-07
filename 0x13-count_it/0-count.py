@@ -30,7 +30,8 @@ def count_words(subreddit, word_list, after=None, dic={}):
         sorted_dic = sorted(dic.items(),
                             key=operator.itemgetter(1), reverse=True)
         for value in sorted_dic:
-            print(value[0] + ": " + str(value[1]))
+            if value[1] > 0:
+                print(value[0] + ": " + str(value[1]))
         return
     count(json_text["data"]["children"], 0, word_list, 0, 0, dic)
     return count_words(subreddit, word_list, json_text["data"]["after"], dic)
