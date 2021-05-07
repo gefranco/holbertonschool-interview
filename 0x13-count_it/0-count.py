@@ -36,12 +36,13 @@ def count(json, index, word_list, index_words, word_count):
         if word_count > 0:
             print(word_list[index_words] + ": " + str(word_count))
         return count(json, 0, word_list, index_words + 1, 0)
-    #c = re.search(
+    # c = re.search(
     #        r'\b' + word_list[index_words] + r'\b',
     #        json[index]["data"]["title"], re.IGNORECASE)
         # if word_list[index_words] in json[index]["data"]["title"]:
         # print(word_list[index_words] + " : " + json[index]["data"]["title"])
-    c = [x.lower() for x in json[index]["data"]["title"].split()].count(word_list[index_words].lower())
+    c = [x.lower() for x in json[index]["data"]["title"].split()]
+    .count(word_list[index_words].lower())
     # print([x.lower() for x in json[index]["data"]["title"].split()])
     if c > 0:
         word_count += c
