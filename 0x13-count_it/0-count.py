@@ -4,7 +4,6 @@ queries the Reddit API,
 parses the title of all hot articles
 and prints a sorted count of given keywords
 """
-#import json
 import operator
 import requests
 import sys
@@ -24,7 +23,8 @@ def count_words(subreddit, word_list, after=None, dic={}):
 
     if req.status_code is not 200:
         return
-    json_text = req.json() #json.loads(req.text)
+    json_text = req.json()  # json.loads(req.text)
+
     if json_text["data"]["after"] is None:
         count(json_text["data"]["children"], 0, word_list, 0, 0, dic)
         sorted_dic = sorted(dic.items(),
@@ -35,6 +35,7 @@ def count_words(subreddit, word_list, after=None, dic={}):
         return
     count(json_text["data"]["children"], 0, word_list, 0, 0, dic)
     return count_words(subreddit, word_list, json_text["data"]["after"], dic)
+
 
 def count(json, index, word_list, index_words, word_count, dic):
     """
