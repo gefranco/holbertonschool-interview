@@ -6,6 +6,12 @@ int *path(int count);
 int swap(binary_tree_t **current);
 int get_current_node(binary_tree_t **current, int *n_path);
 int reorder(binary_tree_t *current);
+
+/**
+ * heap_extract - extracts the root node of a Max Binary Heap
+ * @root: a double pointer to the root node of the heap
+ * Return: 0 on fail, node n otherwise
+ */
 int heap_extract(heap_t **root)
 {
 
@@ -115,7 +121,6 @@ int swap(binary_tree_t **current)
 }
 /**
  * reorder - reorder a Min Binary Heap
- * @heap: a pointer to the heap
  * @current: a pointer to current node
  * Return:  a pointer to the data
  */
@@ -134,6 +139,11 @@ int reorder(binary_tree_t *current)
 	return (0);
 }
 
+/**
+ * count - count the nodes in a binary tree
+ * @root: a pointer to the root node of the tree
+ * Return: 0 on fail, number of nodes otherwise
+ */
 int count(binary_tree_t *root)
 {
 	int c = 1;
