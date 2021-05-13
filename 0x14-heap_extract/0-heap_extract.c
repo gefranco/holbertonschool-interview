@@ -14,38 +14,36 @@ int heap_extract(heap_t **root)
 	int *n_path;
 	int c;
 
-        if (!*root)
-                return (0);
+	if (!root || !*root)
+		return (0);
 	c = count(*root);
-        if (c == 1)
-        {
+	if (c == 1)
+	{
 		data = (*root)->n;
-                /*free(*root);*/
-                return (data);
-        }
+		/*free(*root);*/
+		return (data);
+	}
 
 
-        current = *root;
-        n_path = path(c);
-        get_current_node(&current, n_path);
+	current = *root;
+	n_path = path(c);
+	get_current_node(&current, n_path);
 
+	if (current->left)
+		current = current->left;
+	data = (*root)->n;
+	(*root)->n = current->n;
 
-        if (current->left)
-                current = current->left;
-        data = (*root)->n;
-        (*root)->n = current->n;
+	if (current->parent->right == current)
+		current->parent->right = NULL;
+	else
+		current->parent->left = NULL;
+	free(current);
+	free(n_path);
+	current = *root;
 
-        if (current->parent->right == current)
-                current->parent->right = NULL;
-        else
-                current->parent->left = NULL;
-        free(current);
-        free(n_path);
-
-        current = *root;
-
-        reorder(current);
-        return (data);
+	reorder(current);
+	return (data);
 
 }
 /**
@@ -55,27 +53,27 @@ int heap_extract(heap_t **root)
  */
 int *path(int count)
 {
-        int j;
-        int i = 0;
-        int *path = NULL;
+	int j;
+	int i = 0;
+	int *path = NULL;
 
-        int bkcount = count * 2;
+	int bkcount = count * 2;
 
-        count = count * 2;
-        while ((count = count / 2) > 1)
-        {
-                i++;
-        }
+	count = count * 2;
+	while ((count = count / 2) > 1)
+	{
+		i++;
+	}
 
-        path = malloc(sizeof(int) * (i + 1));
+	path = malloc(sizeof(int) * (i + 1));
 
-        path[i] = -1;
+	path[i] = -1;
 
-        for (j = i - 1; (bkcount = bkcount / 2) > 1 ; j--)
-        {
-                path[j] = bkcount % 2;
-        }
-        return (path);
+	for (j = i - 1; (bkcount = bkcount / 2) > 1 ; j--)
+	{
+		path[j] = bkcount % 2;
+	}
+	return (path);
 }
 /**
  * get_current_node - traverse the path to the node to insert a newone
@@ -85,20 +83,19 @@ int *path(int count)
  */
 int get_current_node(binary_tree_t **current, int *n_path)
 {
-        int i = 0;
+	int i = 0;
 
-        while (n_path[i] != -1)
-        {
-                if ((*current)->left == NULL || (*current)->right == NULL)
-                        return (i);
-                if (n_path[i] == 0)
-                        *current = (*current)->left;
-                else if (n_path[i] == 1)
-                        *current = (*current)->right;
-
-                i++;
-        }
-        return (i);
+	while (n_path[i] != -1)
+	{
+		if ((*current)->left == NULL || (*current)->right == NULL)
+			return (i);
+		if (n_path[i] == 0)
+			*current = (*current)->left;
+		else if (n_path[i] == 1)
+			*current = (*current)->right;
+		i++;
+	}
+	return (i);
 }
 /**
  * swap - swap the value of the node with his parent's value
@@ -107,14 +104,14 @@ int get_current_node(binary_tree_t **current, int *n_path)
  */
 int swap(binary_tree_t **current)
 {
-        int data;
+	int data;
 
-        data = (*current)->parent->n;
-        {
-                (*current)->parent->n = (*current)->n;
-                (*current)->n = data;
-        }
-        return (0);
+	data = (*current)->parent->n;
+	{
+		(*current)->parent->n = (*current)->n;
+		(*current)->n = data;
+	}
+	return (0);
 }
 /**
  * reorder - reorder a Min Binary Heap
@@ -124,22 +121,23 @@ int swap(binary_tree_t **current)
  */
 int reorder(binary_tree_t *current)
 {
-        while (current->left || current->right)
-        {
-        	if (!current->right ||
-                	current->left->n > current->right->n)
-                current = current->left;
-        	else
-                        current = current->right;
-                if (current->parent->n < current->n)
-                        swap(&current);
-        }
-        return (0);
+	while (current->left || current->right)
+	{
+		if (!current->right ||
+			current->left->n > current->right->n)
+		current = current->left;
+		else
+			current = current->right;
+		if (current->parent->n < current->n)
+			swap(&current);
+	}
+	return (0);
 }
 
 int count(binary_tree_t *root)
 {
 	int c = 1;
+
 	if (root == NULL)
 		return (0);
 	c += count(root->left);
