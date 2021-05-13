@@ -15,16 +15,15 @@ int heap_extract(heap_t **root)
 	int c;
 
         if (!*root)
-                return (1);
-        /*if ((*root)->parent == NULL)
+                return (0);
+	c = count(*root);
+        if (c == 1)
         {
 		data = (*root)->n;
-                free(*root);
-                root = NULL;
+                /*free(*root);*/
                 return (data);
-        }*/
+        }
 
-	c = count(*root);
 
         current = *root;
         n_path = path(c);
