@@ -15,7 +15,7 @@ int heap_extract(heap_t **root)
 	int c;
 
         if (!*root)
-                return (0);
+                return (1);
         /*if ((*root)->parent == NULL)
         {
 		data = (*root)->n;
