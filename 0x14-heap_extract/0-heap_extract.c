@@ -27,6 +27,7 @@ int heap_extract(heap_t **root)
 	{
 		data = (*root)->n;
 		/*free(*root);*/
+		free(*root);
 		*root = NULL;
 		return (data);
 	}
