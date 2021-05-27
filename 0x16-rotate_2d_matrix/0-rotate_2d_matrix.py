@@ -1,7 +1,11 @@
 #!/usr/bin/python3
-
+"""
+Rotate 2D Matrix
+"""
 def rotate_2d_matrix(matrix):
-	
+	"""
+	Rotate 2D Matrix
+	"""	
 	index_o = len(matrix) -1
 	index_i = 0
 	copy_matrix = get_copy(matrix)	
@@ -33,6 +37,9 @@ def rotate_2d_matrix(matrix):
 		#print("**")	
 
 def get_col(matrix, index_col):
+    """
+    return column
+    """
     col_tmp = []
     for row in range (0, len(matrix)):
         i = 0
@@ -43,10 +50,16 @@ def get_col(matrix, index_col):
     return col_tmp.copy()
 
 def get_row(matrix, index_row):
+    """
+    return row
+    """
     if index_row <= len(matrix):
         return matrix[index_row].copy()
 
 def replace_col(matrix,index_col, new_col, squares):
+    """
+    replace col
+    """    
     if new_col is None:
         return
     i_r = squares
@@ -57,6 +70,9 @@ def replace_col(matrix,index_col, new_col, squares):
                 matrix[row][col] = new_col[i_r]
                 i_r += 1
 def replace_row(matrix, index_row, new_row, squares):
+    """
+    repalce row
+    """    
     #matrix[index_row] = new_row
     i_c = squares
     for row in range (squares, len(matrix) -squares):
@@ -66,10 +82,16 @@ def replace_row(matrix, index_row, new_row, squares):
                 i_c += 1
 
 def print_matrix(matrix):
+    """
+    Print 2D Matrix
+    """    
     for row in matrix:
         print(row)
 
 def get_copy(matrix):
+    """
+    return a Matrix copy
+    """
     copy = []#[len(matrix)][len(matrix)] = [][]
     for row in matrix:
         copy.append(row.copy())
@@ -77,6 +99,9 @@ def get_copy(matrix):
     return copy
 
 def get_inner_square(matrix, inner):
+    """
+    ...
+    """
     square = []
     my_row = []
     for row in range (inner, len(matrix) - inner):
