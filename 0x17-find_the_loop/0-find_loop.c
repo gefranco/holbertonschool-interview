@@ -1,5 +1,10 @@
 #include "lists.h"
 
+/**
+ * find_listint_loop -  finds the loop in a linked list
+ * @head: head linked list pointer
+ * Return: node where the loop starts, or NULL if there is no loop
+ */
 listint_t *find_listint_loop(listint_t *head)
 {
 	listint_t *first;
@@ -14,6 +19,6 @@ listint_t *find_listint_loop(listint_t *head)
 		if (first == second)
 			return (first);
 	}
-	
-	return NULL;
+
+	return (NULL);
 }
