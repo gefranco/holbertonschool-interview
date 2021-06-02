@@ -16,10 +16,11 @@ listint_t *find_listint_loop(listint_t *head)
 	second = head;
 	while (first && second && first->next)
 	{
-		first = first->next->next;
-		second = second->next;
 		if (first == second)
 			return (first);
+		
+		first = first->next->next;
+		second = second->next;
 	}
 
 	return (NULL);
