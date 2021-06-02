@@ -7,9 +7,11 @@
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-	listint_t *first;
-	listint_t *second;
-
+	listint_t *first, *second;
+	
+	if (!head)
+		return (NULL);
+	
 	first = head->next;
 	second = head;
 	while (first->next)
