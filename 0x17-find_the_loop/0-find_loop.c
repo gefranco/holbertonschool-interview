@@ -8,13 +8,13 @@
 listint_t *find_listint_loop(listint_t *head)
 {
 	listint_t *first, *second;
-	
+
 	if (!head)
 		return (NULL);
-	
+
 	first = head->next;
 	second = head;
-	while (first->next)
+	while (first && second && first->next)
 	{
 		first = first->next->next;
 		second = second->next;
