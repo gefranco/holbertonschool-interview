@@ -9,16 +9,23 @@ listint_t *find_listint_loop(listint_t *head)
 {
 	listint_t *first, *second;
 
-	if (!head)
+	if (!head || !head->next)
 		return (NULL);
 
-	first = head->next;
-	second = head;
+	first = head->next->next;
+	second = head->next;
 	while (first && second && first->next)
 	{
 		if (first == second)
-			return (first);
-
+		{
+			second = head;
+			while (second != first)
+			{
+				second = second->next;
+				first = first->next;
+			}
+			return (second);
+		}
 		first = first->next->next;
 		second = second->next;
 	}
