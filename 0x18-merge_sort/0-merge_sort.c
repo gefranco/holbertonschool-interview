@@ -1,24 +1,23 @@
 #include "sort.h"
 #include <stdio.h>
-
 void merge(int *array, int *left, int *right, size_t size);
 void merge_sort(int *array, size_t size)
 {
 	size_t middle, i;
 	int left[100], right[100];
-	
+
 	if (array == NULL || size == 1)
 		return;
 	middle = size / 2;
-	
+
 	for (i = 0; i < middle; i++)
 		left[i] = array[i];
 	for (i = middle; i < size; i++)
-		right[i - middle] = array[i];	
+		right[i - middle] = array[i];
 
 	merge_sort(left, middle);
 	merge_sort(right, size - middle);
-	
+
 	merge(array, left, right, size);
 }
 
@@ -26,9 +25,10 @@ void merge(int *array, int *left, int *right, size_t size)
 {
 	int i, j, k;
 	int size_left, size_right;
+
 	i = j = k = 0;
-	(void)array;	
-	
+	(void)array;
+
 	size_left = size / 2;
 	size_right = size - size_left;
 	printf("Merging...\n");
@@ -36,8 +36,8 @@ void merge(int *array, int *left, int *right, size_t size)
 	print_array(left, size_left);
 	printf("[right]: ");
 	print_array(right, size_right);
-	
-	while (i < size_left && j < size_right)	
+
+	while (i < size_left && j < size_right)
 	{
 		if (left[i] < right[j])
 		{
@@ -53,7 +53,7 @@ void merge(int *array, int *left, int *right, size_t size)
 	}
 	while (i < size_left)
 	{
-		array[k] =left[i];
+		array[k] = left[i];
 		k += 1;
 		i += 1;
 	}
