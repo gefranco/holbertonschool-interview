@@ -13,6 +13,8 @@ def makeChange(coins, total):
     total_coins = 0
     total_value = 0
 
+    if total is 0:
+        return 0
     while total_value != total:
         if not coins:
             return -1
