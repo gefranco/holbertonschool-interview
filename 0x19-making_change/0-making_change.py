@@ -1,6 +1,15 @@
 #!/usr/bin/python3
-def makeChange(coins, total):
+"""
+...
+"""
 
+
+def makeChange(coins, total):
+    """
+    Given a pile of coins of different values
+    determine the fewest number of coins needed
+    to meet a given amount total
+    """
     total_coins = 0
     total_value = 0
 
@@ -20,6 +29,9 @@ def makeChange(coins, total):
 
 
 def get_max_coin(coins):
+    """
+    Get the max value from a list
+    """
     max_coin = coins[0]
     for coin in coins:
         if coin > max_coin:
