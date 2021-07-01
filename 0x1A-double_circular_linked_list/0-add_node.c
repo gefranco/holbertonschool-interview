@@ -9,36 +9,41 @@
  */
 List *add_node_end(List **list, char *str)
 {
-	List *tmp = *list;
-	List *node;
+	List *node, *tmp = *list;
 
 	if (!list)
 		return (NULL);
-
 	if (!*list)
 	{
 		node = malloc(sizeof(List));
 		if (!node)
 			return (NULL);
 		node->str = strdup(str);
+		if (str != NULL && node->str == NULL)
+		{
+			free(node);
+			return (NULL);
+		}
 		node->next = node;
 		node->prev = node;
-
 		*list = node;
 		return (node);
 	}
-
 	while (tmp)
 	{
 		if (tmp->next == *list)
 			break;
-
 		tmp = tmp->next;
 	}
 	node = malloc(sizeof(List));
 	if (!node)
 		return (NULL);
 	node->str = strdup(str);
+	if (str != NULL && node->str == NULL)
+	{
+		free(node);
+		return (NULL);
+	}
 	tmp->next = node;
 	node->prev = tmp;
 	node->next = *list;
@@ -54,44 +59,38 @@ List *add_node_end(List **list, char *str)
  */
 List *add_node_begin(List **list, char *str)
 {
-	List *tmp = *list;
-	List *node;
+	List *node, *tmp = *list;
 
 	if (!list)
 		return (NULL);
-
-	if (!*list)
-	{
-		node = malloc(sizeof(List));
-		if (!node)
-			return (NULL);
-		node->str = strdup(str);
-		node->next = node;
-		node->prev = node;
-
-		*list = node;
-		return (node);
-	}
 	node = malloc(sizeof(List));
 	if (!node)
 		return (NULL);
 	node->str = strdup(str);
+	if (str != NULL && node->str == NULL)
+	{
+		free(node);
+		return (NULL);
+	}
 
+	if (!*list)
+	{
+		node->next = node;
+		node->prev = node;
+		*list = node;
+		return (node);
+	}
 	node->next = *list;
 	(*list)->prev = node;
-
 	while (tmp)
 	{
 		if (tmp->next == *list)
 			break;
 		tmp = tmp->next;
 	}
-
 	tmp->next = node;
 	*list = node;
-
 	if (!(*list)->prev)
 		(*list)->prev = tmp;
-
 	return (node);
 }
