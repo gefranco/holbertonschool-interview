@@ -1,6 +1,13 @@
 #include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+/**
+ * add_node_end - Add a new node to the end of a double circular linked list
+ * @list: A pointer to the head of the linkd list
+ * @str: the string to copy into the node
+ * Return: pointer to the created node
+ */
 List *add_node_end(List **list, char *str)
 {
 	List *tmp = *list;
@@ -33,6 +40,12 @@ List *add_node_end(List **list, char *str)
 	return (node);
 }
 
+/**
+ * add_node_begin - Add a new node to the beginning of a double linked list
+ * @list: A pointer to the head of the linkd list
+ * @str: the string to copy into the node
+ * Return: pointer to the created node
+ */
 List *add_node_begin(List **list, char *str)
 {
 	List *tmp = *list;
