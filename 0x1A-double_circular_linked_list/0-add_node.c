@@ -1,7 +1,7 @@
 #include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 /**
  * add_node_end - Add a new node to the end of a double circular linked list
  * @list: A pointer to the head of the linkd list
@@ -12,11 +12,11 @@ List *add_node_end(List **list, char *str)
 {
 	List *tmp = *list;
 	List *node;
-
+	char *cpy_str = strdup(str);
 	if (!*list)
 	{
 		node = malloc(sizeof(List));
-		node->str = str;
+		node->str = cpy_str;
 		node->next = node;
 		node->prev = node;
 
@@ -32,7 +32,7 @@ List *add_node_end(List **list, char *str)
 		tmp = tmp->next;
 	}
 	node = malloc(sizeof(List));
-	node->str = str;
+	node->str = cpy_str;
 	tmp->next = node;
 	node->prev = tmp;
 	node->next = *list;
@@ -51,10 +51,11 @@ List *add_node_begin(List **list, char *str)
 	List *tmp = *list;
 	List *node;
 
+	char *cpy_str = strdup(str);
 	if (!*list)
 	{
 		node = malloc(sizeof(List));
-		node->str = str;
+		node->str = cpy_str;
 		node->next = node;
 		node->prev = node;
 
@@ -62,7 +63,7 @@ List *add_node_begin(List **list, char *str)
 		return (node);
 	}
 	node = malloc(sizeof(List));
-	node->str = str;
+	node->str = cpy_str;
 
 	node->next = *list;
 	(*list)->prev = node;
