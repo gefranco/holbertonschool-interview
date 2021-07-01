@@ -31,7 +31,7 @@ List *add_node_end(List **list, char *str)
 		tmp = tmp->next;
 	}
 	node = malloc(sizeof(List));
-	node->str = cpy_str;
+	node->str = strdup(str);
 	tmp->next = node;
 	node->prev = tmp;
 	node->next = *list;
