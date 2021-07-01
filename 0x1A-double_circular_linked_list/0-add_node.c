@@ -13,6 +13,7 @@ List *add_node_end(List **list, char *str)
 	List *tmp = *list;
 	List *node;
 	char *cpy_str = strdup(str);
+
 	if (!*list)
 	{
 		node = malloc(sizeof(List));
@@ -52,6 +53,7 @@ List *add_node_begin(List **list, char *str)
 	List *node;
 
 	char *cpy_str = strdup(str);
+
 	if (!*list)
 	{
 		node = malloc(sizeof(List));
