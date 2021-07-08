@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "sort.h"
-
+#include <stdio.h>
 int replace_array(int *array, int *sorted_array, size_t size);
 /**
  * radix_sort - sorts an array of integers in
@@ -24,8 +24,10 @@ void radix_sort(int *array, size_t size)
 	}
 	while (max_number / exp > 0)
 	{
+		free_list(sort);
 		for (i = 0; i < size; i++)
 			sort[i] = NULL;
+		
 		for (i = 0; i < size; i++)
 		{
 			digit = sorted_array[i] / exp % 10;
@@ -52,6 +54,8 @@ void radix_sort(int *array, size_t size)
 	}
 
 	replace_array(array, sorted_array, size);
+	free_list(sort);
+	free(sorted_array);
 }
 
 /**
@@ -76,15 +80,22 @@ int replace_array(int *array, int *sorted_array, size_t size)
  * @list: ...
  * Return: 0 on success
  */
-int free_list(List *list)
+int free_list(List *list[10])
 {
 	List *tmp;
-
-	while (list)
+	List *index_list;
+	int i;
+	for (i = 0; i < 10; i++)
 	{
-		tmp = list->next;
-		free(list);
-		list = tmp;
+		if(!list[i])
+			continue;
+		index_list = list[i];
+		while (index_list)
+		{
+			tmp = index_list->next;
+			free(index_list);
+			index_list = tmp;
+		}
 	}
 	return (0);
 }
