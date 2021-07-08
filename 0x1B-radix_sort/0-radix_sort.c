@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "sort.h"
-#include <stdio.h>
 
 
 typedef struct List
