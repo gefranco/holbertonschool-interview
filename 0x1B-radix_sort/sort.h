@@ -13,7 +13,7 @@ typedef struct List
 	struct List *next;
 } List;
 List *addNumber(List *init, int number);
-int free_list(List *list);
+int free_list(List *list[10]);
 void print_array(const int *array, size_t size);
 void radix_sort(int *array, size_t size);
 #endif
