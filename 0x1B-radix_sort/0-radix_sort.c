@@ -2,6 +2,12 @@
 #include "sort.h"
 
 int replace_array(int *array, int *sorted_array, size_t size);
+/**
+ * radix_sort - sorts an array of integers in
+ * ascending order using the Radix sort algorithm
+ * @array: the array to sort
+ * @size: the array's size
+ */
 void radix_sort(int *array, size_t size)
 {
 	size_t i, j;
@@ -44,20 +50,32 @@ void radix_sort(int *array, size_t size)
 		print_array(sorted_array, size);
 		exp *= 10;
 	}
-	
+
 	replace_array(array, sorted_array, size);
 }
 
+/**
+ * replace_array - put the values from array 2 to array 1
+ * @array: the array to replace
+ * @sorted_array: the replacer array
+ * @size: the array's size
+ * Return: 0 on success
+ */
 int replace_array(int *array, int *sorted_array, size_t size)
 {
 	size_t i;
+
 	for (i = 0; i < size; i++)
 	{
 		array[i] = sorted_array[i];
 	}
 	return (0);
 }
-
+/**
+ * free_list - ...
+ * @list: ...
+ * Return: 0 on success
+ */
 int free_list(List *list)
 {
 	List *tmp;
@@ -70,7 +88,6 @@ int free_list(List *list)
 	}
 	return (0);
 }
-
 
 List *addNumber(List *init, int number)
 {
