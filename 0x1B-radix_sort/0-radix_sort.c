@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "sort.h"
 
-
+int replace_array(int *array, int *sorted_array, size_t size);
 void radix_sort(int *array, size_t size)
 {
 	size_t i, j;
@@ -44,6 +44,18 @@ void radix_sort(int *array, size_t size)
 		print_array(sorted_array, size);
 		exp *= 10;
 	}
+	
+	replace_array(array, sorted_array, size);
+}
+
+int replace_array(int *array, int *sorted_array, size_t size)
+{
+	size_t i;
+	for (i = 0; i < size; i++)
+	{
+		array[i] = sorted_array[i];
+	}
+	return (0);
 }
 
 int free_list(List *list)
