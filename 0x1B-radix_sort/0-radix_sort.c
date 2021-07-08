@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "sort.h"
-#include <stdio.h>
 int replace_array(int *array, int *sorted_array, size_t size);
 /**
  * radix_sort - sorts an array of integers in
