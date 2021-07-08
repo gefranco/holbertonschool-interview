@@ -26,7 +26,7 @@ void radix_sort(int *array, size_t size)
 		free_list(sort);
 		for (i = 0; i < size; i++)
 			sort[i] = NULL;
-		
+
 		for (i = 0; i < size; i++)
 		{
 			digit = sorted_array[i] / exp % 10;
@@ -84,9 +84,10 @@ int free_list(List *list[10])
 	List *tmp;
 	List *index_list;
 	int i;
+
 	for (i = 0; i < 10; i++)
 	{
-		if(!list[i])
+		if (!list[i])
 			continue;
 		index_list = list[i];
 		while (index_list)
