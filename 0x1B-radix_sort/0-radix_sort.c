@@ -24,7 +24,7 @@ void radix_sort(int *array, size_t size)
 	while (max_number / exp > 0)
 	{
 		free_list(sort);
-		for (i = 0; i < size; i++)
+		for (i = 0; i < 10; i++)
 			sort[i] = NULL;
 
 		for (i = 0; i < size; i++)
@@ -35,7 +35,7 @@ void radix_sort(int *array, size_t size)
 			else
 				addNumber(sort[digit], sorted_array[i]);
 		}
-		for (i = 0, j = 0; i < size; i++)
+		for (i = 0, j = 0; i < 10; i++)
 		{
 			if (sort[i])
 			{
@@ -79,7 +79,7 @@ int replace_array(int *array, int *sorted_array, size_t size)
  * @list: ...
  * Return: 0 on success
  */
-int free_list(List *list[10])
+int free_list(List *list[])
 {
 	List *tmp;
 	List *index_list;
