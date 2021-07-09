@@ -15,6 +15,8 @@ void radix_sort(int *array, size_t size)
 	List *node = NULL;
 	List *sort[10] = {NULL};
 
+	if (!array)
+		return;
 	sorted_array = malloc(sizeof(int) * size);
 	for (i = 0; i < size; i++)
 	{
