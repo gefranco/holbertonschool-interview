@@ -1,8 +1,13 @@
 #!/usr/bin/python3
+"""
+...
+"""
 
 
 def island_perimeter(grid):
-
+    """
+    ...
+    """
     perimeter = 0
     for x in range(0, len(grid)):
         for y in range(0, len(grid[x])):
