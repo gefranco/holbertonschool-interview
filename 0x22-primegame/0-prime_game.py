@@ -1,7 +1,13 @@
 #!/usr/bin/python3
+"""
+...
+"""
 
 
 def isWinner(x, nums):
+    """
+    ...
+    """
     index = 0
     maria_points = 0
     ben_points = 0
@@ -25,15 +31,24 @@ def isWinner(x, nums):
 
 
 def remove(array_nums, array_primes):
+    """
+    ...
+    """
     remove_multiples(array_primes.pop(0), array_nums)
 
 
 def get_array_nums(array, n):
+    """
+    ...
+    """
     for i in range(1, n + 1):
         array.append(i)
 
 
 def remove_multiples(n, array):
+    """
+    ...
+    """
     i = 1
     length = len(array)
     while i < length:
@@ -45,6 +60,9 @@ def remove_multiples(n, array):
 
 
 def get_primes(array, n):
+    """
+    ...
+    """
     for number in range(2, n + 1):
         prime = True
         for div in range(2, number):
