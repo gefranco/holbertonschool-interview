@@ -29,7 +29,12 @@ def isWinner(x, nums):
             ben_points += 1
         else:
             maria_points += 1
-    return "Maria" if maria_points > ben_points else "Ben"
+    if maria_points > ben_points:
+        return "Maria"
+    elif ben_points > maria_points:
+        return "Ben"
+    else:
+        return None    
 
 
 def remove(array_nums, array_primes):
