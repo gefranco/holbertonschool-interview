@@ -8,6 +8,8 @@ def isWinner(x, nums):
     """
     ...
     """
+    if x <= 0 or nums is None or len(nums) < x:
+        return None
     index = 0
     maria_points = 0
     ben_points = 0
