@@ -31,10 +31,10 @@ def isWinner(x, nums):
             maria_points += 1
     if maria_points > ben_points:
         return "Maria"
-    # elif ben_points > maria_points:
-        # return "Ben"
-    # else:
-        # return None
+    elif ben_points > maria_points:
+        return "Ben"
+    else:
+        return None
     return "Ben"
 
 
